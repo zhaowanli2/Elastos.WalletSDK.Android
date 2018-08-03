@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void TestWallet() {
         try {
+            String rootPath = getApplicationContext().getFilesDir().getParent();
             //1. 初始化钱包所需的数据
-            ElastosWalletUtils.InitConfig(this);
+            ElastosWalletUtils.InitConfig(this, rootPath);
 
             //2. 传递一个可读写的路径，创建 MasterWalletManager
-            String rootPath = getApplicationContext().getFilesDir().getParent();
             mWalletManager = new MasterWalletManager(rootPath);
 
             //3. 生成助记词
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
             //4. 创建主钱包
             String masterWalletId = "masterWalletId";
-            String phrasePassword = "masterWalletId";
-            String payPassword = "masterWalletId";
+            String phrasePassword = "";
+            String payPassword = "elastos2018";
             IMasterWallet masterWallet = mWalletManager.CreateMasterWallet(masterWalletId, mnemonic,
                     phrasePassword, payPassword, language);
 
